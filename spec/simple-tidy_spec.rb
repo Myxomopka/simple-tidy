@@ -36,10 +36,28 @@ Lobby your company to join W3C, see http://www.w3.org/Consortium
       "<html>\n<head>\n<title></title>\n</head>\n<body>\nfoo\n</body>\n</html>"
   end
 
-  it 'should have a shortcut to tidy html without creating a SimpleTidy instance'
-  # SimpleTidy.clean(html).should == SimpleTidy.new.clean(html)
+  it 'should have a shortcut to tidy html without creating a SimpleTidy instance' do
+    html = '<html>foo</html>'
 
-  it 'should be able to get warnings'
+    SimpleTidy.clean(html).should == SimpleTidy.new.clean(html)
+  end
+
+  it 'should be able to pass options to shortcut'
+
+  it 'should be able to get warnings' do
+    html = '<html>foo</html>'
+    tidy = SimpleTidy.new
+
+    tidy.warnings.should be_empty
+    tidy.clean html
+    tidy.warnings.length.should == 4
+    tidy.warnings.should include('line 1 column 1 - Warning: missing <!DOCTYPE> declaration')
+    tidy.warnings.should include("line 1 column 7 - Warning: inserting missing 'title' element")
+  end
+
+  it 'should be able to get errors'
+
+  it 'should be able to get diagnostics ... aka info? ... aka debug?'
 
   it 'should be able to set the indent option'
 
