@@ -59,6 +59,12 @@ Lobby your company to join W3C, see http://www.w3.org/Consortium
 
   it 'should be able to get diagnostics ... aka info? ... aka debug?'
 
-  it 'should be able to set the indent option'
+  it 'should be able to set the indent option' do
+    html = '<html>foo</html>'
+
+    SimpleTidy.new( :indent_spaces => 2 ).clean(html).should == 
+      "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">\n\n" + 
+      "<html>\n<head>\n  <title></title>\n</head>\n\n<body>\n  foo\n</body>\n</html>"
+  end
 
 end
