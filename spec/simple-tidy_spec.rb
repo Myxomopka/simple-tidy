@@ -42,4 +42,14 @@ describe SimpleTidy do
     SimpleTidy.clean( html, :indent_spaces => 2 ).should == SimpleTidy.new( :indent_spaces => 2 ).clean(html)
   end
 
+  it 'should work with quotes (and whatnot) in html' do
+    html = %[<html>\\\\ "why" 'hello' \'\"\'THERE\'\"\' ! !! ! \\\ .</html>]
+    
+    SimpleTidy.new.clean(html).should == 
+      "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">\n" + 
+      "<html>\n<head>\n<title></title>\n</head>\n<body>\n" +
+      %[\\\\ "why" 'hello' \'\"\'THERE\'\"\' ! !! ! \\\ .] +
+      "\n</body>\n</html>"
+  end
+
 end

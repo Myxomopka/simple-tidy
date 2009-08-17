@@ -28,7 +28,7 @@ class SimpleTidy
 private
 
   def get_output_and_warnings html
-    stdin, stdout, stderr = Open3.popen3 "echo '#{ html }' | tidy #{ tidy_options_text }"
+    stdin, stdout, stderr = Open3.popen3 "tidy #{ tidy_options_text } #{ temp_file(html) }"
     output   = stdout.read.strip
     warnings = stderr.read.split("\n").select {|line| line =~ /line \d+ column \d+ - Warning:/ }
     return output, warnings
@@ -55,6 +55,12 @@ private
 
   def dashes_for_option option
     SINGLE_DASH_OPTIONS.include?(option) ? '-' : '--'
+  end
+
+  def temp_file html
+    filename = "/tmp/simple-tidy-#{ Time.now.strftime('%Y%m%d%H%M%S') }.html"
+    File.open(filename, 'w'){|f| f << html }
+    filename
   end
 
 end
