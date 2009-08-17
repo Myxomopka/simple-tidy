@@ -12,7 +12,16 @@ command line app (instead of the C library).
 
   require 'simple-tidy'
 
-  clean_html = SimpleTidy.new( :indent => 'auto', :wrap => 50 ).clean html
-
-  # same as the above
-  clean_html = SimpleTidy.clean html, :indent => 'auto', :wrap => 50
+  >> puts SimpleTidy.clean '<html>foo</html>', :indent_spaces => 2
+  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+  
+  <html>
+  <head>
+    <title></title>
+  </head>
+  
+  <body>
+    foo
+  </body>
+  </html>
+  => nil

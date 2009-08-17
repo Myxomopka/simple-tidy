@@ -21,8 +21,8 @@ class SimpleTidy
      @output
   end
 
-  def self.clean html
-    SimpleTidy.new.clean html
+  def self.clean html, options = nil
+    SimpleTidy.new(options).clean html
   end
 
 private
