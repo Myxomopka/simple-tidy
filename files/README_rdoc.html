@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Mon Aug 17 00:52:10 -0700 2009</td>
+      <td>Mon Aug 17 00:55:09 -0700 2009</td>
     </tr>
     </table>
   </div>
@@ -98,6 +98,21 @@ command line app (instead of the C library).
   &lt;/body&gt;
   &lt;/html&gt;
   =&gt; nil
+</pre>
+<p>
+Or, you can make instances of <a
+href="../classes/SimpleTidy.html">SimpleTidy</a> for lower-level usage (eg.
+to get warnings)
+</p>
+<pre>
+  &gt;&gt; tidy = SimpleTidy.new :indent_spaces =&gt; 2
+  =&gt; #&lt;SimpleTidy:0x7fb5e56a70f0 @tidy_options={:indent_spaces=&gt;2, :tidy_mark=&gt;false}
+
+  &gt;&gt; tidy.clean '&lt;html&gt;foo&lt;/html&gt;'
+  =&gt; &quot;&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 3.2//EN&quot;&gt;\n\n&lt;html&gt;\n&lt;head&gt;\n  &lt;title&gt;&lt;/title&gt;\n&lt;/head&gt;\n\n&lt;body&gt;\n  foo\n&lt;/body&gt;\n&lt;/html&gt;&quot;
+
+  &gt;&gt; tidy.warnings
+  =&gt; [&quot;line 1 column 1 - Warning: missing &lt;!DOCTYPE&gt; declaration&quot;, &quot;line 1 column 7 - Warning: plain text isn't allowed in &lt;head&gt; elements&quot;, &quot;line 1 column 7 - Warning: inserting implicit &lt;body&gt;&quot;, &quot;line 1 column 7 - Warning: inserting missing 'title' element&quot;]
 </pre>
 
     </div>
