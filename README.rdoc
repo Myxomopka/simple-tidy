@@ -1,0 +1,18 @@
+= SimpleTidy
+
+I've had a lot of trouble with the http://rubyforge.org/projects/tidy/ project (which uses libtidy-ruby), 
+getting segfaults and whatnot.  So ... I decided to make super simple wrapper around the <b>tidy</b> 
+command line app (instead of the C library).
+
+== Installation
+
+  $ sudo gem install devfu-simple-tidy --source http://gems.github.com
+
+== Usage
+
+  require 'simple-tidy'
+
+  clean_html = SimpleTidy.new( :indent => 'auto', :wrap => 50 ).clean html
+
+  # same as the above
+  clean_html = SimpleTidy.clean html, :indent => 'auto', :wrap => 50
