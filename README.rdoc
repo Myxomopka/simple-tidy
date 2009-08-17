@@ -25,3 +25,14 @@ command line app (instead of the C library).
   </body>
   </html>
   => nil
+
+Or, you can make instances of SimpleTidy for lower-level usage (eg. to get warnings)
+
+  >> tidy = SimpleTidy.new :indent_spaces => 2
+  => #<SimpleTidy:0x7fb5e56a70f0 @tidy_options={:indent_spaces=>2, :tidy_mark=>false}
+
+  >> tidy.clean '<html>foo</html>'
+  => "<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">\n\n<html>\n<head>\n  <title></title>\n</head>\n\n<body>\n  foo\n</body>\n</html>"
+
+  >> tidy.warnings
+  => ["line 1 column 1 - Warning: missing <!DOCTYPE> declaration", "line 1 column 7 - Warning: plain text isn't allowed in <head> elements", "line 1 column 7 - Warning: inserting implicit <body>", "line 1 column 7 - Warning: inserting missing 'title' element"]
